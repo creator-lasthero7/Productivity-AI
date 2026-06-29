@@ -1,0 +1,279 @@
+/* Analytics Page — Premium Glassmorphism Styles */
+
+.analyticsPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* KPI Row */
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-5);
+}
+
+.kpiCard {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: all var(--duration-normal) ease;
+  overflow: hidden;
+}
+
+.kpiCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.kpiCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--glass-border-hover);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.kpiIcon {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-1);
+}
+
+.kpiVal {
+  font-family: var(--font-accent);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.kpiLabel {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Charts Grid */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-6);
+}
+
+.chartCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-glass-inset);
+}
+
+.chartTitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: var(--space-6);
+  color: var(--text-primary);
+}
+
+/* Bar Chart Svg */
+.barChartContainer {
+  width: 100%;
+}
+
+.barChartSvg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gridLine {
+  stroke: rgba(255,255,255,0.05);
+  stroke-width: 1px;
+}
+
+.axisLabel {
+  font-family: var(--font-accent);
+  font-size: 10px;
+  fill: var(--text-secondary);
+  font-weight: 600;
+}
+
+.barTrack {
+  fill: rgba(255, 255, 255, 0.03);
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 0.5px;
+}
+
+.glowingBar {
+  transition: height 0.5s ease-out, y 0.5s ease-out;
+  filter: drop-shadow(0 0 10px hsla(172, 80%, 50%, 0.3));
+}
+
+/* Donut Chart Svg */
+.donutChartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.donutSvg {
+  width: 180px;
+  height: 180px;
+  transform: rotate(-90deg);
+}
+
+.donutTrack {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 14;
+}
+
+.donutSector {
+  transition: stroke-dashoffset 0.8s var(--ease-out);
+  cursor: pointer;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+}
+
+.donutSector:hover {
+  stroke-width: 16;
+}
+
+.donutLegend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--space-3);
+  border-top: 1px solid var(--glass-border);
+  padding-top: var(--space-4);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.02);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--duration-fast) ease;
+}
+
+.legendItem:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--glass-border-hover);
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+}
+
+.legendName {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.legendPct {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* AI Recommendation Card */
+.aiAdviceCard {
+  background: radial-gradient(ellipse at top right, hsla(265, 75%, 65%, 0.08), transparent 70%), rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-left: 3px solid var(--accent-purple);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.aiAdviceHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.aiAdviceHeader h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.aiAdviceIcon {
+  font-size: 1.35rem;
+  color: var(--accent-purple);
+  animation: pulseIcon 2.5s infinite;
+  filter: drop-shadow(0 0 10px hsla(265, 75%, 65%, 0.4));
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); filter: brightness(1.2) drop-shadow(0 0 15px hsla(265, 75%, 65%, 0.6)); }
+}
+
+.aiAdviceBody p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: var(--space-5);
+}
+
+.aiAdviceBody p strong {
+  color: var(--accent-orange);
+}
+
+.advicePillList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.advicePill {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: var(--glass-panel-inner);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.advicePill::before {
+  content: '→';
+  color: var(--accent-purple);
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,401 @@
+/* Tasks Page — Premium Glassmorphism Styles */
+
+.tasksPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.filtersCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
+}
+
+.searchRow {
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: all var(--duration-fast) ease;
+}
+
+.searchInput:focus {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 15px hsla(18, 90%, 55%, 0.15);
+  background: rgba(255,255,255,0.06);
+}
+
+.filterOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.filterLabel {
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.pillGroup {
+  display: flex;
+  background: var(--glass-panel-inner);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+}
+
+.pill {
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.pillActive {
+  background: var(--gradient-orange);
+  color: white;
+  box-shadow: 0 0 15px hsla(18, 90%, 55%, 0.2);
+}
+
+.selectFilter {
+  background: var(--glass-panel-inner);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) ease;
+}
+
+.selectFilter:focus {
+  border-color: var(--accent-orange);
+}
+
+/* Task list layout */
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.taskCard {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              background var(--duration-normal) ease;
+}
+
+.taskCard:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-2px);
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.taskHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  gap: var(--space-4);
+}
+
+.taskDone {
+  opacity: 0.45;
+  background: var(--glass-panel-inner) !important;
+}
+
+.taskDone .taskTitle {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.taskCheck {
+  flex-shrink: 0;
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-orange);
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: all var(--duration-fast) ease;
+}
+
+.checkbox:hover {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 10px hsla(18, 90%, 55%, 0.2);
+}
+
+.checked {
+  background: hsla(18, 90%, 55%, 0.15);
+  border-color: var(--accent-orange);
+}
+
+.taskMarker {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.colorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.taskInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.taskTitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.taskRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.taskActions {
+  display: flex;
+  gap: var(--space-1);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.taskCard:hover .taskActions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  transition: all var(--duration-fast) ease;
+}
+
+.actionBtn:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+}
+
+/* Subtask Wrapper styling */
+.subtaskWrapper {
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-panel-inner);
+  padding: var(--space-4) var(--space-5);
+  animation: slideDown 250ms var(--ease-out);
+}
+
+.subtaskTitleHeader {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.subtaskGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.subtaskItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.subtaskItem:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--glass-border-hover);
+}
+
+.subtaskDone {
+  opacity: 0.45;
+}
+
+.subtaskDone .subLabel {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.subCheckbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: bold;
+}
+
+.subChecked {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: white;
+}
+
+.subLabel {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.expandBar {
+  border-top: 1px solid var(--glass-border);
+  background: linear-gradient(180deg, transparent, var(--glass-panel-inner));
+  padding: var(--space-2) 0;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color var(--duration-fast) ease;
+}
+
+.taskCard:hover .expandBar {
+  color: var(--text-secondary);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) 0;
+  text-align: center;
+  border: 1px dashed var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.01);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.7;
+}
+
+.emptyState h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-accent);
+}
+
+.emptyState p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .filterOptions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+}

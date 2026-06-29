@@ -1,0 +1,837 @@
+{
+  "tasks": [
+    {
+      "id": 1782714200001,
+      "title": "Release version 1.0.0 MVP",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🚀"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "15:00",
+      "subtasks": [
+        {
+          "id": 2001,
+          "title": "Merge feature branches",
+          "done": true
+        },
+        {
+          "id": 2002,
+          "title": "Verify environment keys",
+          "done": false
+        }
+      ],
+      "userEmail": "alex.dev@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714200002,
+      "title": "Refactor database integration layer",
+      "category": "Work",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "COLOR",
+        "value": "#a78bfa"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "18:30",
+      "subtasks": [],
+      "userEmail": "alex.dev@productivity.ai",
+      "done": true
+    },
+    {
+      "id": 1782714200003,
+      "title": "Study System Design lecture slides",
+      "category": "Study",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📚"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "20:00",
+      "subtasks": [],
+      "userEmail": "alex.dev@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714200004,
+      "title": "Pick up grocery list for dinner",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🛒"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "17:30",
+      "subtasks": [],
+      "userEmail": "alex.dev@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714300001,
+      "title": "Design main landing page mockups",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🎨"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "14:00",
+      "subtasks": [],
+      "userEmail": "sarah.design@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714300002,
+      "title": "Review client UI feedback",
+      "category": "Work",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "COLOR",
+        "value": "#38bdf8"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "17:00",
+      "subtasks": [],
+      "userEmail": "sarah.design@productivity.ai",
+      "done": true
+    },
+    {
+      "id": 1782714300003,
+      "title": "Research Figma Auto-Layout updates",
+      "category": "Study",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🧠"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "19:00",
+      "subtasks": [],
+      "userEmail": "sarah.design@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714300004,
+      "title": "Call dentist for checkup appointment",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🏥"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "11:00",
+      "subtasks": [],
+      "userEmail": "sarah.design@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714400001,
+      "title": "Submit draft of Thesis chapter 3",
+      "category": "Study",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📖"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "12:00",
+      "subtasks": [],
+      "userEmail": "emma.study@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714400002,
+      "title": "Complete internship coding challenge",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "💻"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "16:00",
+      "subtasks": [],
+      "userEmail": "emma.study@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714400003,
+      "title": "Evening 5K jogging session",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🏃"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "18:00",
+      "subtasks": [],
+      "userEmail": "emma.study@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714500001,
+      "title": "Work on Web Agency client project",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "💼"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "10:00",
+      "subtasks": [],
+      "userEmail": "2107@gmail.com",
+      "done": false
+    },
+    {
+      "id": 1782714500002,
+      "title": "Review math lectures for exam prep",
+      "category": "Study",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📖"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "14:00",
+      "subtasks": [],
+      "userEmail": "2107@gmail.com",
+      "done": false
+    },
+    {
+      "id": 1782714500003,
+      "title": "Read 10 pages of self-improvement book",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📚"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "21:00",
+      "subtasks": [],
+      "userEmail": "2107@gmail.com",
+      "done": false
+    },
+    {
+      "id": 1782714600001,
+      "title": "Prepare quarterly growth report",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📈"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "09:30",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714600002,
+      "title": "Review marketing agency proposals",
+      "category": "Work",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "COLOR",
+        "value": "#38bdf8"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "13:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714600003,
+      "title": "Organize client onboarding documentation",
+      "category": "Work",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📂"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "16:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": true
+    },
+    {
+      "id": 1782714600004,
+      "title": "Learn SQL query optimization techniques",
+      "category": "Study",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "EMOJI",
+        "value": "💻"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "15:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714600005,
+      "title": "Read Google Analytics v4 documentation",
+      "category": "Study",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "📖"
+      },
+      "dueDate": "2026-06-30",
+      "dueTime": "10:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714600006,
+      "title": "Renew house lease agreement contract",
+      "category": "Personal",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🏠"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "11:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714600007,
+      "title": "Plan weekend mountain hiking trip itinerary",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "⛰️"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "19:00",
+      "subtasks": [],
+      "userEmail": "ryan.growth@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700001,
+      "title": "Code review for secure billing module",
+      "category": "Work",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "💳"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "10:30",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700002,
+      "title": "Create Figma mockups for Settings page",
+      "category": "Work",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "COLOR",
+        "value": "#a78bfa"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "14:30",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700003,
+      "title": "Respond to urgent customer support tickets",
+      "category": "Work",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "✉️"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "16:00",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": true
+    },
+    {
+      "id": 1782714700004,
+      "title": "Revise algorithms and data structures notes",
+      "category": "Study",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🧠"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "11:00",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700005,
+      "title": "Finish Machine Learning lecture 4 video",
+      "category": "Study",
+      "priority": "MEDIUM",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🤖"
+      },
+      "dueDate": "2026-06-30",
+      "dueTime": "15:00",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700006,
+      "title": "Buy gift for brother's birthday party",
+      "category": "Personal",
+      "priority": "HIGH",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🎁"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "18:00",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    },
+    {
+      "id": 1782714700007,
+      "title": "Clean kitchen refrigerator shelves",
+      "category": "Personal",
+      "priority": "LOW",
+      "marker": {
+        "type": "EMOJI",
+        "value": "🧼"
+      },
+      "dueDate": "2026-06-29",
+      "dueTime": "19:30",
+      "subtasks": [],
+      "userEmail": "elena.smith@productivity.ai",
+      "done": false
+    }
+  ],
+  "habits": [
+    {
+      "id": 1782714210001,
+      "name": "Solve LeetCode Daily Challenge",
+      "emoji": "👨‍💻",
+      "target": 7,
+      "completed": 5,
+      "streak": 12,
+      "history": [
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "alex.dev@productivity.ai"
+    },
+    {
+      "id": 1782714210002,
+      "name": "Gym Workout",
+      "emoji": "🏋️",
+      "target": 7,
+      "completed": 3,
+      "streak": 4,
+      "history": [
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "alex.dev@productivity.ai"
+    },
+    {
+      "id": 1782714310001,
+      "name": "Daily UX Sketching Practice",
+      "emoji": "✏️",
+      "target": 7,
+      "completed": 6,
+      "streak": 18,
+      "history": [
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "sarah.design@productivity.ai"
+    },
+    {
+      "id": 1782714410001,
+      "name": "Anki Flashcards Review",
+      "emoji": "🧠",
+      "target": 7,
+      "completed": 2,
+      "streak": 3,
+      "history": [
+        "2026-06-29"
+      ],
+      "userEmail": "emma.study@productivity.ai"
+    },
+    {
+      "id": 1782714610001,
+      "name": "Morning Meditation",
+      "emoji": "🧘",
+      "target": 7,
+      "completed": 5,
+      "streak": 15,
+      "history": [
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714610002,
+      "name": "Read 20 pages",
+      "emoji": "📚",
+      "target": 7,
+      "completed": 6,
+      "streak": 20,
+      "history": [
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714610003,
+      "name": "Drink 3L Water",
+      "emoji": "💧",
+      "target": 7,
+      "completed": 7,
+      "streak": 30,
+      "history": [
+        "2026-06-24",
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714610004,
+      "name": "Stretch & Mobility",
+      "emoji": "🤸",
+      "target": 7,
+      "completed": 4,
+      "streak": 8,
+      "history": [
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714710001,
+      "name": "Typing Speed Practice",
+      "emoji": "⌨️",
+      "target": 7,
+      "completed": 4,
+      "streak": 11,
+      "history": [
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "elena.smith@productivity.ai"
+    },
+    {
+      "id": 1782714710002,
+      "name": "No Sugar Intake",
+      "emoji": "🍎",
+      "target": 7,
+      "completed": 5,
+      "streak": 22,
+      "history": [
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "elena.smith@productivity.ai"
+    },
+    {
+      "id": 1782714710003,
+      "name": "Language Learning (Spanish)",
+      "emoji": "🇪🇸",
+      "target": 7,
+      "completed": 6,
+      "streak": 45,
+      "history": [
+        "2026-06-24",
+        "2026-06-25",
+        "2026-06-26",
+        "2026-06-27",
+        "2026-06-28",
+        "2026-06-29"
+      ],
+      "userEmail": "elena.smith@productivity.ai"
+    }
+  ],
+  "goals": [
+    {
+      "id": 1782714220001,
+      "title": "Build SaaS Product MVP",
+      "emoji": "🚀",
+      "category": "Career",
+      "progress": 66,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Set up database and configurations",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Implement authentication routing",
+          "done": true
+        },
+        {
+          "id": 3,
+          "title": "Deploy initial build to Vercel",
+          "done": false
+        }
+      ],
+      "done": false,
+      "userEmail": "alex.dev@productivity.ai"
+    },
+    {
+      "id": 1782714320001,
+      "title": "Publish Case Studies Portfolio",
+      "emoji": "💼",
+      "category": "Career",
+      "progress": 100,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Refine mockups",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Write design case studies",
+          "done": true
+        }
+      ],
+      "done": true,
+      "userEmail": "sarah.design@productivity.ai"
+    },
+    {
+      "id": 1782714420001,
+      "title": "Complete Semester 1 Exams",
+      "emoji": "🎓",
+      "category": "Personal",
+      "progress": 33,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Finish reading core textbooks",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Write thesis chapter 1 and 2 draft",
+          "done": false
+        }
+      ],
+      "done": false,
+      "userEmail": "emma.study@productivity.ai"
+    },
+    {
+      "id": 1782714620001,
+      "title": "Master Data Analysis Stack",
+      "emoji": "📊",
+      "category": "Career",
+      "progress": 50,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Complete Advanced SQL Bootcamp",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Build portfolio with Python & Pandas",
+          "done": false
+        }
+      ],
+      "done": false,
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714620002,
+      "title": "Improve Sleep Hygiene Habits",
+      "emoji": "💤",
+      "category": "Personal",
+      "progress": 100,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Turn off screens at 10 PM daily",
+          "done": true
+        }
+      ],
+      "done": true,
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714720001,
+      "title": "Acquire Bilingual Certification",
+      "emoji": "🇪🇸",
+      "category": "Personal",
+      "progress": 50,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Pass Spanish DELE A1 Exam",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Pass Spanish DELE A2 Exam",
+          "done": false
+        }
+      ],
+      "done": false,
+      "userEmail": "elena.smith@productivity.ai"
+    },
+    {
+      "id": 1782714720002,
+      "title": "Promote to Senior Engineer Role",
+      "emoji": "🏆",
+      "category": "Career",
+      "progress": 50,
+      "milestones": [
+        {
+          "id": 1,
+          "title": "Successfully lead two projects to launch",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Finish reading Designing Data-Intensive Apps",
+          "done": false
+        }
+      ],
+      "done": false,
+      "userEmail": "elena.smith@productivity.ai"
+    }
+  ],
+  "events": [
+    {
+      "id": 1782714230001,
+      "title": "Daily Tech standup meeting",
+      "date": "2026-06-29",
+      "time": "09:00 AM",
+      "type": "work",
+      "userEmail": "alex.dev@productivity.ai"
+    },
+    {
+      "id": 1782714230002,
+      "title": "Sprint Planning session",
+      "date": "2026-06-30",
+      "time": "14:00 PM",
+      "type": "work",
+      "userEmail": "alex.dev@productivity.ai"
+    },
+    {
+      "id": 1782714330001,
+      "title": "Interactive Design Critique",
+      "date": "2026-06-29",
+      "time": "11:30 AM",
+      "type": "personal",
+      "userEmail": "sarah.design@productivity.ai"
+    },
+    {
+      "id": 1782714430001,
+      "title": "Research Lab meeting",
+      "date": "2026-06-29",
+      "time": "14:00 PM",
+      "type": "work",
+      "userEmail": "emma.study@productivity.ai"
+    },
+    {
+      "id": 1782714630001,
+      "title": "Quarterly Growth Standup Sync",
+      "date": "2026-06-29",
+      "time": "10:00 AM",
+      "type": "work",
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714630002,
+      "title": "Cardio Fitness Session",
+      "date": "2026-06-29",
+      "time": "17:30 PM",
+      "type": "personal",
+      "userEmail": "ryan.growth@productivity.ai"
+    },
+    {
+      "id": 1782714730001,
+      "title": "Billing Core Code Review Meeting",
+      "date": "2026-06-29",
+      "time": "13:30 PM",
+      "type": "work",
+      "userEmail": "elena.smith@productivity.ai"
+    }
+  ],
+  "users": [
+    {
+      "email": "alex.dev@productivity.ai",
+      "password": "password123",
+      "name": "Alex Dev"
+    },
+    {
+      "email": "sarah.design@productivity.ai",
+      "password": "designpass321",
+      "name": "Sarah Design"
+    },
+    {
+      "email": "emma.study@productivity.ai",
+      "password": "emmastudy456",
+      "name": "Emma Study"
+    },
+    {
+      "email": "2107@gmail.com",
+      "password": "1234567",
+      "name": "hello user"
+    },
+    {
+      "email": "ryan.growth@productivity.ai",
+      "password": "ryanpass",
+      "name": "Ryan Growth"
+    },
+    {
+      "email": "elena.smith@productivity.ai",
+      "password": "elenapass",
+      "name": "Elena Smith"
+    }
+  ]
+}

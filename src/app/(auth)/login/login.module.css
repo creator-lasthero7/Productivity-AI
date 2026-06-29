@@ -1,0 +1,243 @@
+/* Login Page — Premium Glassmorphism */
+
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-6);
+}
+
+/* Background Orbs */
+.bgOrbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  mix-blend-mode: screen;
+}
+
+.orb1 {
+  width: 500px;
+  height: 500px;
+  background: hsla(18, 90%, 55%, 0.12);
+  top: -15%;
+  right: -10%;
+  animation: floatBlob1 20s infinite alternate ease-in-out;
+}
+
+.orb2 {
+  width: 450px;
+  height: 450px;
+  background: hsla(265, 75%, 65%, 0.1);
+  bottom: -20%;
+  left: -10%;
+  animation: floatBlob2 25s infinite alternate ease-in-out;
+}
+
+.orb3 {
+  width: 300px;
+  height: 300px;
+  background: hsla(172, 80%, 50%, 0.06);
+  top: 40%;
+  left: 40%;
+  animation: floatBlob3 22s infinite alternate ease-in-out;
+}
+
+/* Container */
+.loginContainer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  animation: fadeInUp 0.6s var(--ease-out) both;
+}
+
+/* Brand */
+.brand {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brandIcon {
+  filter: drop-shadow(0 0 20px hsla(18, 90%, 55%, 0.3));
+}
+
+.brandName {
+  font-family: var(--font-accent);
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+  padding-right: 0.1em;
+}
+
+.brandSub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Card */
+.card {
+  width: 100%;
+  background: var(--glass-bg-solid);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-xl), inset 0 1px 1px rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  margin-bottom: var(--space-6);
+}
+
+.tab {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tabActive {
+  background: var(--gradient-orange);
+  color: white;
+  box-shadow: 0 0 20px hsla(18, 90%, 55%, 0.15);
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.formOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.remember input {
+  accent-color: var(--accent-orange);
+}
+
+.forgot {
+  font-size: 0.8rem;
+  color: var(--accent-orange);
+}
+.forgot:hover {
+  color: var(--accent-amber);
+}
+
+.submitBtn {
+  margin-top: var(--space-2);
+  height: 48px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-5) 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+
+.divider span {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+/* OAuth */
+.oauthRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.oauthBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Footer */
+.footer {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}

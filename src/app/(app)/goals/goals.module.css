@@ -1,0 +1,405 @@
+/* Goals Page — Premium Glassmorphism Styles */
+
+.goalsPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* Creator Card */
+.creatorCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-glass-inset);
+  animation: slideDown 250ms var(--ease-out);
+}
+
+.creatorCard h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.75rem;
+  margin-bottom: var(--space-5);
+  color: var(--text-primary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-5);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.input,
+.select,
+.milestoneInput {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: all var(--duration-fast) ease;
+}
+
+.input:focus,
+.select:focus,
+.milestoneInput:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 12px hsla(265, 75%, 65%, 0.15);
+  background: rgba(255,255,255,0.06);
+}
+
+.emojiList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  background: var(--glass-panel-inner);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+}
+
+.emojiBtn {
+  background: none;
+  border: 1px solid transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) ease;
+}
+
+.emojiBtn:hover {
+  background: rgba(255,255,255,0.08);
+  transform: scale(1.1);
+}
+
+.selectedEmoji {
+  background: hsla(265, 75%, 65%, 0.15);
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 10px hsla(265, 75%, 65%, 0.2);
+}
+
+.milestoneInputRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.milestoneInput {
+  flex: 1;
+}
+
+.creatorMilestonesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  background: var(--glass-panel-inner);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.creatorMilestoneItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+}
+
+.removeMilestoneBtn {
+  background: none;
+  border: none;
+  color: var(--accent-rose);
+  cursor: pointer;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.removeMilestoneBtn:hover {
+  background: hsla(350, 80%, 60%, 0.1);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--glass-border);
+  padding-top: var(--space-4);
+}
+
+/* Goals Grid */
+.goalsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--space-6);
+}
+
+.goalCard {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.goalCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.goalCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--glass-border-hover);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.goalEmojiBg {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.goalEmoji {
+  font-size: 1.75rem;
+}
+
+.goalHeaderInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.goalTitleText {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.goalCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.progressCircleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background: rgba(167, 139, 250, 0.05);
+  border: 2px solid var(--accent-purple);
+  box-shadow: 0 0 15px hsla(265, 75%, 65%, 0.2);
+  flex-shrink: 0;
+}
+
+.progressPercentage {
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.progressBarWrapper {
+  margin: var(--space-2) 0;
+}
+
+/* Milestones Tracker */
+.milestonesSection {
+  border-top: 1px solid var(--glass-border);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.milestonesHeader {
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.milestonesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.milestoneItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--glass-panel-inner);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.milestoneItem:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--glass-border-hover);
+}
+
+.milestoneDone {
+  opacity: 0.5;
+  background: rgba(0,0,0,0.4);
+}
+
+.milestoneDone .milestoneTitle {
+  text-decoration: line-through;
+  color: white;
+}
+
+:global(.light) .milestoneDone .milestoneTitle {
+  color: black;
+}
+
+.milestoneCheckbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+
+.milestoneChecked {
+  background: var(--gradient-purple);
+  border-color: transparent;
+  color: white;
+  box-shadow: 0 0 10px hsla(265, 75%, 65%, 0.3);
+}
+
+.milestoneTitle {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+}
+
+:global(.light) .milestoneTitle {
+  color: black;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) 0;
+  text-align: center;
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.01);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.7;
+}
+
+.emptyState h3 {
+  font-family: var(--font-accent);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+
+.emptyState p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
