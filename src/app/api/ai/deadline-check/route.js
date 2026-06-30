@@ -1,17 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const dbPath = path.join(process.cwd(), 'src/data/db.json');
-
-async function getDbData() {
-  try {
-    const fileData = await fs.readFile(dbPath, 'utf-8');
-    return JSON.parse(fileData);
-  } catch (err) {
-    return { users: [], tasks: [], habits: [], events: [], goals: [] };
-  }
-}
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 function getApiKey() {
   return process.env.NVIDIA_API_KEY || null;
@@ -117,8 +106,9 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const dbData = await getDbData();
-    const userTasks = (dbData.tasks || []).filter(t => t.userEmail === userEmail);
+    const q = query(collection(db, 'tasks'), where('userEmail', '==', userEmail));
+    const snapshot = await getDocs(q);
+    const userTasks = snapshot.docs.map(doc => doc.data());
 
     const urgentTasks = findUrgentTasks(userTasks);
 
@@ -133,7 +123,7 @@ export async function POST(req) {
     const alerts = [];
 
     if (apiKey) {
-      // Use MiniMax-M3 to generate personalized alert messages
+      // Use Llama to generate personalized alert messages
       const taskDescriptions = urgentTasks.map((t, i) => {
         const urgency = getUrgencyLevel(t);
         const timeLeft = formatTimeLeft(t);
@@ -154,7 +144,7 @@ IMPORTANT: Respond ONLY with a JSON array of strings. No markdown. No code block
             'Authorization': `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: "meta/llama3-70b-instruct",
+            model: "nvidia/llama-3.3-nemotron-super-49b-v1.5",
             messages: [
               { role: "system", content: systemPrompt },
               { role: "user", content: userMessage }

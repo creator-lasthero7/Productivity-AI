@@ -1,17 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const dbPath = path.join(process.cwd(), 'src/data/db.json');
-
-async function getDbData() {
-  try {
-    const fileData = await fs.readFile(dbPath, 'utf-8');
-    return JSON.parse(fileData);
-  } catch (err) {
-    return { users: [], tasks: [], habits: [], events: [], goals: [] };
-  }
-}
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export async function POST(request) {
   try {
@@ -138,12 +127,20 @@ export async function POST(request) {
       });
     }
 
-    // ─── ORIGINAL DIGEST EMAIL MODE (unchanged below) ───
-
-    const db = await getDbData();
-    const tasks = (db.tasks || []).filter(t => t.userEmail === recipientEmail);
-    const habits = (db.habits || []).filter(h => h.userEmail === recipientEmail);
-    const goals = (db.goals || []).filter(g => g.userEmail === recipientEmail);
+    // ─── ORIGINAL DIGEST EMAIL MODE ───
+    const qTasks = query(collection(db, 'tasks'), where('userEmail', '==', recipientEmail));
+    const qHabits = query(collection(db, 'habits'), where('userEmail', '==', recipientEmail));
+    const qGoals = query(collection(db, 'goals'), where('userEmail', '==', recipientEmail));
+    
+    const [snapTasks, snapHabits, snapGoals] = await Promise.all([
+      getDocs(qTasks),
+      getDocs(qHabits),
+      getDocs(qGoals)
+    ]);
+    
+    const tasks = snapTasks.docs.map(d => d.data());
+    const habits = snapHabits.docs.map(d => d.data());
+    const goals = snapGoals.docs.map(d => d.data());
 
     // Compile stats
     const totalTasks = tasks.length;
