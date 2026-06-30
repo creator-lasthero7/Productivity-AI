@@ -1,21 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const dbPath = path.join(process.cwd(), 'src/data/db.json');
-
-async function getDbData() {
-  try {
-    const fileData = await fs.readFile(dbPath, 'utf-8');
-    return JSON.parse(fileData);
-  } catch (err) {
-    return { users: [], tasks: [], habits: [], events: [], goals: [] };
-  }
-}
-
-async function writeDbData(data) {
-  await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf-8');
-}
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const getUserEmail = (req) => req.headers.get('x-user-email');
 
@@ -24,8 +9,9 @@ export async function GET(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     
-    const db = await getDbData();
-    const userTasks = (db.tasks || []).filter(t => t.userEmail === userEmail);
+    const q = query(collection(db, 'tasks'), where('userEmail', '==', userEmail));
+    const snapshot = await getDocs(q);
+    const userTasks = snapshot.docs.map(doc => doc.data());
     
     // Sort tasks by id (timestamp) descending to match original behavior
     userTasks.sort((a, b) => b.id - a.id);
@@ -52,10 +38,7 @@ export async function POST(request) {
       subtasks: task.subtasks || []
     };
     
-    const db = await getDbData();
-    if (!db.tasks) db.tasks = [];
-    db.tasks.push(newTask);
-    await writeDbData(db);
+    await setDoc(doc(db, 'tasks', id.toString()), newTask);
     
     return NextResponse.json(newTask);
   } catch (error) {
@@ -70,18 +53,10 @@ export async function PUT(request) {
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const { id, ...updatedFields } = await request.json();
     
-    const db = await getDbData();
-    if (!db.tasks) db.tasks = [];
+    const taskRef = doc(db, 'tasks', id.toString());
+    await updateDoc(taskRef, updatedFields);
     
-    const index = db.tasks.findIndex(t => t.id === id && t.userEmail === userEmail);
-    if (index === -1) {
-      return NextResponse.json({ error: 'Task not found' }, { status: 404 });
-    }
-    
-    db.tasks[index] = { ...db.tasks[index], ...updatedFields };
-    await writeDbData(db);
-    
-    return NextResponse.json(db.tasks[index]);
+    return NextResponse.json({ id, userEmail, ...updatedFields });
   } catch (error) {
     console.error('PUT Task Error:', error);
     return NextResponse.json({ error: 'Failed to update task' }, { status: 500 });
@@ -93,18 +68,9 @@ export async function DELETE(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const { searchParams } = new URL(request.url);
-    const id = Number(searchParams.get('id'));
+    const id = searchParams.get('id');
     
-    const db = await getDbData();
-    if (!db.tasks) db.tasks = [];
-    
-    const index = db.tasks.findIndex(t => t.id === id && t.userEmail === userEmail);
-    if (index === -1) {
-      return NextResponse.json({ error: 'Task not found' }, { status: 404 });
-    }
-    
-    db.tasks.splice(index, 1);
-    await writeDbData(db);
+    await deleteDoc(doc(db, 'tasks', id.toString()));
     
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -112,4 +78,3 @@ export async function DELETE(request) {
     return NextResponse.json({ error: 'Failed to delete task' }, { status: 500 });
   }
 }
-

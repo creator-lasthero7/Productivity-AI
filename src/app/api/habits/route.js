@@ -1,21 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const dbPath = path.join(process.cwd(), 'src/data/db.json');
-
-async function getDbData() {
-  try {
-    const fileData = await fs.readFile(dbPath, 'utf-8');
-    return JSON.parse(fileData);
-  } catch (err) {
-    return { users: [], tasks: [], habits: [], events: [], goals: [] };
-  }
-}
-
-async function writeDbData(data) {
-  await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf-8');
-}
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs, doc, setDoc, updateDoc } from 'firebase/firestore';
 
 const getUserEmail = (req) => req.headers.get('x-user-email');
 
@@ -24,8 +9,9 @@ export async function GET(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     
-    const db = await getDbData();
-    const userHabits = (db.habits || []).filter(h => h.userEmail === userEmail);
+    const q = query(collection(db, 'habits'), where('userEmail', '==', userEmail));
+    const snapshot = await getDocs(q);
+    const userHabits = snapshot.docs.map(doc => doc.data());
     
     return NextResponse.json(userHabits);
   } catch (error) {
@@ -50,10 +36,7 @@ export async function POST(request) {
       history: []
     };
     
-    const db = await getDbData();
-    if (!db.habits) db.habits = [];
-    db.habits.push(newHabit);
-    await writeDbData(db);
+    await setDoc(doc(db, 'habits', id.toString()), newHabit);
     
     return NextResponse.json(newHabit);
   } catch (error) {
@@ -68,21 +51,12 @@ export async function PUT(request) {
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const { id, ...updatedFields } = await request.json();
     
-    const db = await getDbData();
-    if (!db.habits) db.habits = [];
+    const habitRef = doc(db, 'habits', id.toString());
+    await updateDoc(habitRef, updatedFields);
     
-    const index = db.habits.findIndex(h => h.id === id && h.userEmail === userEmail);
-    if (index === -1) {
-      return NextResponse.json({ error: 'Habit not found' }, { status: 404 });
-    }
-    
-    db.habits[index] = { ...db.habits[index], ...updatedFields };
-    await writeDbData(db);
-    
-    return NextResponse.json(db.habits[index]);
+    return NextResponse.json({ id, userEmail, ...updatedFields });
   } catch (error) {
     console.error('PUT Habit Error:', error);
     return NextResponse.json({ error: 'Failed to update habit' }, { status: 500 });
   }
 }
-

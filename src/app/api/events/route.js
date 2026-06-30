@@ -1,21 +1,6 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
-
-const dbPath = path.join(process.cwd(), 'src/data/db.json');
-
-async function getDbData() {
-  try {
-    const fileData = await fs.readFile(dbPath, 'utf-8');
-    return JSON.parse(fileData);
-  } catch (err) {
-    return { users: [], tasks: [], habits: [], events: [], goals: [] };
-  }
-}
-
-async function writeDbData(data) {
-  await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf-8');
-}
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
 
 const getUserEmail = (req) => req.headers.get('x-user-email');
 
@@ -24,8 +9,9 @@ export async function GET(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     
-    const db = await getDbData();
-    const userEvents = (db.events || []).filter(e => e.userEmail === userEmail);
+    const q = query(collection(db, 'events'), where('userEmail', '==', userEmail));
+    const snapshot = await getDocs(q);
+    const userEvents = snapshot.docs.map(doc => doc.data());
     
     return NextResponse.json(userEvents);
   } catch (error) {
@@ -47,10 +33,7 @@ export async function POST(request) {
       id
     };
     
-    const db = await getDbData();
-    if (!db.events) db.events = [];
-    db.events.push(newEvent);
-    await writeDbData(db);
+    await setDoc(doc(db, 'events', id.toString()), newEvent);
     
     return NextResponse.json(newEvent);
   } catch (error) {
@@ -58,4 +41,3 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Failed to create event' }, { status: 500 });
   }
 }
-
