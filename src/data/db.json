@@ -832,6 +832,16 @@
       "email": "elena.smith@productivity.ai",
       "password": "elenapass",
       "name": "Elena Smith"
+    },
+    {
+      "email": "1234@gmail.com",
+      "password": "1234567890",
+      "name": "abcd"
+    },
+    {
+      "email": "abcd@gmail.com",
+      "password": "123456",
+      "name": "abcd"
     }
   ]
 }

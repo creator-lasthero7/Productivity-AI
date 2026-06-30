@@ -423,6 +423,8 @@ a:hover { color: var(--accent-purple); }
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-glass-inset);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
 }
 
 .glass-card::before {
@@ -451,8 +453,9 @@ a:hover { color: var(--accent-purple); }
 
 .glass-card:hover {
   border-color: var(--glass-border-hover);
-  transform: translateY(-2px);
+  transform: perspective(1000px) translateY(-4px) scale(1.02) rotateX(2deg) rotateY(-1deg);
   box-shadow: var(--shadow-lg), var(--shadow-glass-inset);
+  z-index: 10;
 }
 
 .glass-card:hover::after {
@@ -478,7 +481,8 @@ a:hover { color: var(--accent-purple); }
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: perspective(500px) scale(0.95) translateZ(-10px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
@@ -854,6 +858,38 @@ select.input {
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: perspective(500px) scale(0.8) translateZ(-50px); }
+  50% { transform: perspective(500px) scale(1.05) translateZ(10px); }
+  100% { opacity: 1; transform: perspective(500px) scale(1) translateZ(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px var(--accent-orange), 0 0 20px var(--accent-orange); }
+  50% { box-shadow: 0 0 20px var(--accent-orange), 0 0 40px var(--accent-orange); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+.animate-pop-in {
+  animation: popIn 0.5s var(--ease-spring) both;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.4s var(--ease-out) both;
 }
 
 /* Scroll-triggered animation classes */

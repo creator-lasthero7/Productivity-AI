@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
-const getDbPath = () => path.join(process.cwd(), 'src', 'data', 'db.json');
+const dbPath = path.join(process.cwd(), 'src/data/db.json');
 
-const readDb = () => {
-  const filePath = getDbPath();
-  const fileData = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(fileData);
-};
+async function getDbData() {
+  try {
+    const fileData = await fs.readFile(dbPath, 'utf-8');
+    return JSON.parse(fileData);
+  } catch (err) {
+    return { users: [], tasks: [], habits: [], events: [], goals: [] };
+  }
+}
 
 export async function POST(request) {
   try {
@@ -137,16 +140,19 @@ export async function POST(request) {
 
     // ─── ORIGINAL DIGEST EMAIL MODE (unchanged below) ───
 
-    const db = readDb();
-    
+    const db = await getDbData();
+    const tasks = (db.tasks || []).filter(t => t.userEmail === recipientEmail);
+    const habits = (db.habits || []).filter(h => h.userEmail === recipientEmail);
+    const goals = (db.goals || []).filter(g => g.userEmail === recipientEmail);
+
     // Compile stats
-    const totalTasks = db.tasks.length;
-    const completedTasks = db.tasks.filter(t => t.done).length;
-    const pendingTasks = db.tasks.filter(t => !t.done);
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(t => t.done).length;
+    const pendingTasks = tasks.filter(t => !t.done);
     const taskCompletionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-    const activeHabits = db.habits || [];
-    const activeGoals = db.goals || [];
+    const activeHabits = habits;
+    const activeGoals = goals;
 
     // Generate beautifully styled HTML email with premium glassmorphism themes
     const htmlContent = `

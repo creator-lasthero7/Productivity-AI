@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 
-const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODEL = 'minimaxai/minimax-m3';
-
 function getApiKey() {
   return process.env.NVIDIA_API_KEY || null;
 }
@@ -29,29 +26,25 @@ export async function POST(req) {
 
 Respond with exactly one sentence.`;
 
-    const response = await fetch(NVIDIA_API_URL, {
+    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: MODEL,
+        model: "nvidia/llama-3.3-nemotron-super-49b-v1.5",
         messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userMessage },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userMessage }
         ],
-        max_tokens: 8192,
-        temperature: 1.00,
-        top_p: 0.95,
-        stream: false,
+        temperature: 0.7,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('NVIDIA Insight API Error:', response.status, errorText);
+      console.error('Nvidia API Error:', response.status, errorText);
       return NextResponse.json({ 
         insight: "✨ You're making steady progress. Keep focusing on one task at a time!" 
       });
@@ -69,3 +62,4 @@ Respond with exactly one sentence.`;
     });
   }
 }
+

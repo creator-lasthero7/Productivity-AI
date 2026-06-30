@@ -79,7 +79,7 @@ export default function TaskModal({ isOpen, onClose, taskToEdit = null }) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div
-        className={`glass-card ${styles.modal}`}
+        className={`glass-card animate-pop-in ${styles.modal}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.header}>

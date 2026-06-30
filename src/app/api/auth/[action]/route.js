@@ -1,24 +1,21 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
-const getDbPath = () => path.join(process.cwd(), 'src', 'data', 'db.json');
+const dbPath = path.join(process.cwd(), 'src/data/db.json');
 
-const readDb = () => {
-  const filePath = getDbPath();
-  const fileData = fs.readFileSync(filePath, 'utf-8');
-  const parsed = JSON.parse(fileData);
-  // Ensure users array exists
-  if (!parsed.users) {
-    parsed.users = [];
+async function getDbData() {
+  try {
+    const fileData = await fs.readFile(dbPath, 'utf-8');
+    return JSON.parse(fileData);
+  } catch (err) {
+    return { users: [], tasks: [], habits: [], events: [], goals: [] };
   }
-  return parsed;
-};
+}
 
-const writeDb = (data) => {
-  const filePath = getDbPath();
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-};
+async function writeDbData(data) {
+  await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+}
 
 export async function POST(request, { params }) {
   try {
@@ -30,17 +27,25 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const db = readDb();
-    const existingUser = db.users.find(u => u.email === email);
+    const normalizedEmail = email.toLowerCase().trim();
+    const db = await getDbData();
+    if (!db.users) db.users = [];
+
+    const existingUserIndex = db.users.findIndex(u => u.email === normalizedEmail);
+    const existingUser = existingUserIndex !== -1 ? db.users[existingUserIndex] : null;
 
     if (action === 'signup') {
       if (existingUser) {
         return NextResponse.json({ error: 'Email is already in use' }, { status: 400 });
       }
       
-      const newUser = { email, password, name: name || email.split('@')[0] };
+      const newUser = { 
+        email: normalizedEmail, 
+        password, 
+        name: name || normalizedEmail.split('@')[0] 
+      };
       db.users.push(newUser);
-      writeDb(db);
+      await writeDbData(db);
       
       return NextResponse.json({ 
         message: 'Signup successful', 
@@ -69,8 +74,8 @@ export async function POST(request, { params }) {
       }
       
       // Update password
-      existingUser.password = password;
-      writeDb(db);
+      db.users[existingUserIndex].password = password;
+      await writeDbData(db);
       
       return NextResponse.json({ message: 'Password reset successful' });
     }
@@ -82,3 +87,4 @@ export async function POST(request, { params }) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+

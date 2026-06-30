@@ -1,21 +1,21 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
-const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODEL = 'minimaxai/minimax-m3';
+const dbPath = path.join(process.cwd(), 'src/data/db.json');
+
+async function getDbData() {
+  try {
+    const fileData = await fs.readFile(dbPath, 'utf-8');
+    return JSON.parse(fileData);
+  } catch (err) {
+    return { users: [], tasks: [], habits: [], events: [], goals: [] };
+  }
+}
 
 function getApiKey() {
   return process.env.NVIDIA_API_KEY || null;
 }
-
-const getDbPath = () => path.join(process.cwd(), 'src', 'data', 'db.json');
-
-const readDb = () => {
-  const filePath = getDbPath();
-  const fileData = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(fileData);
-};
 
 /**
  * Finds tasks with deadlines approaching within the next 24 hours.
@@ -117,8 +117,9 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const db = readDb();
-    const userTasks = db.tasks.filter((t) => t.userEmail === userEmail);
+    const dbData = await getDbData();
+    const userTasks = (dbData.tasks || []).filter(t => t.userEmail === userEmail);
+
     const urgentTasks = findUrgentTasks(userTasks);
 
     // No urgent tasks → no API call, no cost
@@ -146,23 +147,19 @@ IMPORTANT: Respond ONLY with a JSON array of strings. No markdown. No code block
       const userMessage = `Generate alert messages for these approaching deadlines:\n${taskDescriptions}`;
 
       try {
-        const response = await fetch(NVIDIA_API_URL, {
+        const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            model: MODEL,
+            model: "meta/llama3-70b-instruct",
             messages: [
-              { role: 'system', content: systemPrompt },
-              { role: 'user', content: userMessage },
+              { role: "system", content: systemPrompt },
+              { role: "user", content: userMessage }
             ],
-            max_tokens: 2048,
             temperature: 0.8,
-            top_p: 0.95,
-            stream: false,
           }),
         });
 

@@ -1,19 +1,21 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
-const getDbPath = () => path.join(process.cwd(), 'src', 'data', 'db.json');
+const dbPath = path.join(process.cwd(), 'src/data/db.json');
 
-const readDb = () => {
-  const filePath = getDbPath();
-  const fileData = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(fileData);
-};
+async function getDbData() {
+  try {
+    const fileData = await fs.readFile(dbPath, 'utf-8');
+    return JSON.parse(fileData);
+  } catch (err) {
+    return { users: [], tasks: [], habits: [], events: [], goals: [] };
+  }
+}
 
-const writeDb = (data) => {
-  const filePath = getDbPath();
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
-};
+async function writeDbData(data) {
+  await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+}
 
 const getUserEmail = (req) => req.headers.get('x-user-email');
 
@@ -21,10 +23,13 @@ export async function GET(request) {
   try {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    const db = readDb();
-    const userHabits = db.habits.filter(h => h.userEmail === userEmail);
+    
+    const db = await getDbData();
+    const userHabits = (db.habits || []).filter(h => h.userEmail === userEmail);
+    
     return NextResponse.json(userHabits);
   } catch (error) {
+    console.error('GET Habits Error:', error);
     return NextResponse.json({ error: 'Failed to read habits' }, { status: 500 });
   }
 }
@@ -34,22 +39,25 @@ export async function POST(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const habit = await request.json();
-    const db = readDb();
     
+    const id = Date.now();
     const newHabit = {
       ...habit,
       userEmail,
-      id: Date.now(),
+      id,
       streak: 0,
       completed: 0,
       history: []
     };
     
+    const db = await getDbData();
+    if (!db.habits) db.habits = [];
     db.habits.push(newHabit);
-    writeDb(db);
+    await writeDbData(db);
     
     return NextResponse.json(newHabit);
   } catch (error) {
+    console.error('POST Habit Error:', error);
     return NextResponse.json({ error: 'Failed to create habit' }, { status: 500 });
   }
 }
@@ -59,24 +67,22 @@ export async function PUT(request) {
     const userEmail = getUserEmail(request);
     if (!userEmail) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const { id, ...updatedFields } = await request.json();
-    const db = readDb();
     
-    let updatedHabit = null;
-    db.habits = db.habits.map((h) => {
-      if (h.id === id && h.userEmail === userEmail) {
-        updatedHabit = { ...h, ...updatedFields };
-        return updatedHabit;
-      }
-      return h;
-    });
+    const db = await getDbData();
+    if (!db.habits) db.habits = [];
     
-    if (!updatedHabit) {
+    const index = db.habits.findIndex(h => h.id === id && h.userEmail === userEmail);
+    if (index === -1) {
       return NextResponse.json({ error: 'Habit not found' }, { status: 404 });
     }
     
-    writeDb(db);
-    return NextResponse.json(updatedHabit);
+    db.habits[index] = { ...db.habits[index], ...updatedFields };
+    await writeDbData(db);
+    
+    return NextResponse.json(db.habits[index]);
   } catch (error) {
+    console.error('PUT Habit Error:', error);
     return NextResponse.json({ error: 'Failed to update habit' }, { status: 500 });
   }
 }
+

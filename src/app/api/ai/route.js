@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 
-const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODEL = 'minimaxai/minimax-m3';
-
 function getApiKey() {
   return process.env.NVIDIA_API_KEY || null;
 }
@@ -13,7 +10,7 @@ export async function POST(req) {
     const { message, tasks, habits } = await req.json();
 
     if (!apiKey) {
-      return NextResponse.json({ 
+      return NextResponse.json({
         reply: "⚠️ NVIDIA API key not found. Please check your .env.local file and restart the dev server.",
         action: { type: 'NONE' }
       });
@@ -40,31 +37,27 @@ ${taskList || '(none)'}
 Current habits:
 ${habitList || '(none)'}`;
 
-    const response = await fetch(NVIDIA_API_URL, {
+    const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: MODEL,
+        model: "nvidia/llama-3.3-nemotron-super-49b-v1.5",
         messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userMessage },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userMessage }
         ],
-        max_tokens: 8192,
-        temperature: 1.00,
-        top_p: 0.95,
-        stream: false,
+        temperature: 1.0,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('NVIDIA API Error:', response.status, errorText);
+      console.error('Nvidia API Error:', response.status, errorText);
       return NextResponse.json({
-        reply: `⚠️ AI service returned an error (${response.status}). The API key may be invalid or expired. Please check your NVIDIA API key.`,
+        reply: `⚠️ AI service returned an error (${response.status}). The API key may be invalid or expired. Please check your NVIDIA_API_KEY.`,
         action: { type: 'NONE' }
       });
     }
@@ -93,3 +86,4 @@ ${habitList || '(none)'}`;
     });
   }
 }
+
