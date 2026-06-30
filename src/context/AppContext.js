@@ -237,6 +237,12 @@ export function AppProvider({ children }) {
       if (res.ok) {
         const newTask = await res.json();
         setTasks((prev) => [newTask, ...prev]);
+        addToast({
+          id: `toast-${Date.now()}`,
+          type: 'SUCCESS',
+          title: 'Task Created',
+          text: `"${newTask.title}" has been added to your list.`,
+        });
         return newTask;
       }
     } catch (err) {
@@ -270,6 +276,23 @@ export function AppProvider({ children }) {
     const updatedSubtasks = task.subtasks?.map(st => ({ ...st, done: newDone })) || [];
     
     await updateTask(id, { done: newDone, subtasks: updatedSubtasks });
+
+    if (newDone) {
+      // Create a dynamic, motivational message based on priority
+      let message = `Great job completing "${task.title}"!`;
+      if (task.priority === 'HIGH') {
+        message = `Incredible work crushing that high-priority task: "${task.title}"! 🚀`;
+      } else if (task.priority === 'MEDIUM') {
+        message = `Solid progress! "${task.title}" is done. Keep it up! 🎯`;
+      }
+
+      addToast({
+        id: `toast-done-${Date.now()}`,
+        type: 'SUCCESS',
+        title: 'Task Completed',
+        text: message,
+      });
+    }
   };
 
   const toggleSubtask = async (taskId, subtaskId) => {
@@ -419,6 +442,12 @@ export function AppProvider({ children }) {
       if (res.ok) {
         const newEvent = await res.json();
         setEvents((prev) => [...prev, newEvent]);
+        addToast({
+          id: `toast-event-${Date.now()}`,
+          type: 'SUCCESS',
+          title: 'Meeting Scheduled',
+          text: `"${newEvent.title}" is set for ${newEvent.date} at ${newEvent.time}.`,
+        });
       }
     } catch (err) {
       console.error(err);
