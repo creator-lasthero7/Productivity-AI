@@ -5,6 +5,7 @@ import PageHeader from '@/components/layout/PageHeader';
 import { useApp } from '@/context/AppContext';
 import TaskModal from '@/components/dashboard/TaskModal';
 import { DashboardSkeleton } from '@/components/layout/SkeletonLoader';
+import EventModal from '@/components/dashboard/EventModal';
 import styles from './dashboard.module.css';
 
 /* ---- Helpers ---- */
@@ -21,6 +22,7 @@ export default function DashboardPage() {
   const { user, tasks, toggleTask, habits, goals, events, loading, preferences } = useApp();
   const [fabOpen, setFabOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [eventModalOpen, setEventModalOpen] = useState(false);
   const [aiTip, setAiTip] = useState('✨ Analyzing your stats...');
   const [mounted, setMounted] = useState(false);
 
@@ -157,7 +159,7 @@ export default function DashboardPage() {
                   <div
                     key={task.id}
                     className={`${styles.taskItem} ${task.done ? styles.taskDone : ''}`}
-                    onClick={() => toggleTask(task.id)}
+                    onClick={(e) => { e.preventDefault(); toggleTask(task.id); }}
                   >
                     <div className={styles.taskCheck}>
                       <div className={`${styles.checkbox} ${task.done ? styles.checked : ''}`}>
@@ -305,6 +307,9 @@ export default function DashboardPage() {
       </button>
       <div className={`fab-menu ${fabOpen ? 'open' : ''}`}>
         <div className="fab-menu-item">
+          <span className="fab-menu-label" onClick={() => { setEventModalOpen(true); setFabOpen(false); }}>Add Meeting</span>
+        </div>
+        <div className="fab-menu-item">
           <span className="fab-menu-label" onClick={() => { setModalOpen(true); setFabOpen(false); }}>Add Task</span>
         </div>
       </div>
@@ -312,6 +317,11 @@ export default function DashboardPage() {
       {/* Task Modal */}
       {modalOpen && (
         <TaskModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      )}
+
+      {/* Event Modal */}
+      {eventModalOpen && (
+        <EventModal isOpen={eventModalOpen} onClose={() => setEventModalOpen(false)} />
       )}
     </>
   );

@@ -4,12 +4,14 @@ import { useState } from 'react';
 import PageHeader from '@/components/layout/PageHeader';
 import { useApp } from '@/context/AppContext';
 import TaskModal from '@/components/dashboard/TaskModal';
+import EventModal from '@/components/dashboard/EventModal';
 import { TasksSkeleton } from '@/components/layout/SkeletonLoader';
 import styles from './tasks.module.css';
 
 export default function TasksPage() {
   const { tasks, toggleTask, toggleSubtask, deleteTask, loading } = useApp();
   const [modalOpen, setModalOpen] = useState(false);
+  const [eventModalOpen, setEventModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
   
   if (loading) {
@@ -79,9 +81,14 @@ export default function TasksPage() {
       <PageHeader
         title="Tasks"
         actions={
-          <button className="btn btn-primary" onClick={handleOpenNewTaskModal}>
-            + New Task
-          </button>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button className="btn btn-secondary" onClick={() => setEventModalOpen(true)}>
+              + New Meeting
+            </button>
+            <button className="btn btn-primary" onClick={handleOpenNewTaskModal}>
+              + New Task
+            </button>
+          </div>
         }
       />
 
@@ -282,6 +289,14 @@ export default function TasksPage() {
             setTaskToEdit(null);
           }}
           taskToEdit={taskToEdit}
+        />
+      )}
+
+      {/* Event Modal */}
+      {eventModalOpen && (
+        <EventModal
+          isOpen={eventModalOpen}
+          onClose={() => setEventModalOpen(false)}
         />
       )}
     </>
