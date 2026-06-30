@@ -258,9 +258,9 @@ export function AppProvider({ children }) {
         body: JSON.stringify({ id, ...updatedFields }),
       });
       if (res.ok) {
-        const updatedTask = await res.json();
+        const updatedFieldsFromServer = await res.json();
         setTasks((prev) =>
-          prev.map((t) => (t.id === id ? updatedTask : t))
+          prev.map((t) => (t.id === id ? { ...t, ...updatedFieldsFromServer } : t))
         );
       }
     } catch (err) {
@@ -372,9 +372,9 @@ export function AppProvider({ children }) {
         }),
       });
       if (res.ok) {
-        const updatedHabit = await res.json();
+        const updatedFieldsFromServer = await res.json();
         setHabits((prev) =>
-          prev.map((h) => (h.id === id ? updatedHabit : h))
+          prev.map((h) => (h.id === id ? { ...h, ...updatedFieldsFromServer } : h))
         );
       }
     } catch (err) {
@@ -421,9 +421,9 @@ export function AppProvider({ children }) {
         }),
       });
       if (res.ok) {
-        const updatedGoal = await res.json();
+        const updatedFieldsFromServer = await res.json();
         setGoals((prev) =>
-          prev.map((g) => (g.id === goalId ? updatedGoal : g))
+          prev.map((g) => (g.id === goalId ? { ...g, ...updatedFieldsFromServer } : g))
         );
       }
     } catch (err) {
